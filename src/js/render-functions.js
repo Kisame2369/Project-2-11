@@ -7,14 +7,6 @@ const gallery = document.querySelector(".gallery");
 const loader = document.querySelector(".loader");
 let lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
 
-export function showLoader() {
-  loader.style.display = "inline-block";
-}
-
-export function hideLoader() {
-  loader.style.display = "none";
-}
-
 export function clearGallery() {
   gallery.innerHTML = "";
 }

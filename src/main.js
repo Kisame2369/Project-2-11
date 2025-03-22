@@ -1,5 +1,5 @@
 import { fetchPhotos } from "./js/pixabay-api.js";
-import { showLoader, hideLoader, clearGallery, renderPhotos } from "./js/render-functions.js";
+import { clearGallery, renderPhotos } from "./js/render-functions.js";
 
 function handleSearch(event) {
   event.preventDefault();
@@ -7,16 +7,22 @@ function handleSearch(event) {
   const inputValue = document.querySelector("input[name='search-text']").value.trim();
   if (!inputValue) return;
 
+  
+  const loader = document.querySelector(".loader")
+
+  
   clearGallery();
-  showLoader();
+  loader.style.display = 'inline-block';
 
   fetchPhotos(inputValue)
     .then(photos => {
-      hideLoader();
       renderPhotos(photos);
+      loader.style.display = 'none';
     })
-    .catch(() => hideLoader());
+    .catch(error => {
+      console.error("Error:", error);
+      loader.style.display = 'none';
+    });
 }
-
 document.querySelector("form").addEventListener("submit", handleSearch);
 
